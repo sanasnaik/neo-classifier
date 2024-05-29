@@ -1,5 +1,5 @@
 # NEO Classifier
-Data 101 final project. Used R code to predict whether asteroids/NEOs would be classified as hazardous or non-hazardous.
+Used R code to predict whether asteroids/NEOs would be classified as hazardous or non-hazardous.
 
 ## What I Did
 I used Kaggle to find a dataset I was interested in using, which was the “Nearest Earth Objects” dataset sourced from NASA. I plotted the variables from the dataset to gain some insight into it. It had information on different asteroids and other NEOs such as their names, estimated sizes, relative velocity, miss distance, absolute magnitude, and whether or not they were classified as hazardous. I then created a decision tree using rpart for the dataset to predict whether or not an asteroid would be classified as hazardous based on its  characteristics. I also used naive Bayes to create predictions, and then I compared the accuracies of both methods using their confusion matrices.
