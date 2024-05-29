@@ -1,0 +1,56 @@
+# Sana Naik
+# neo.csv = https://www.kaggle.com/datasets/sameepvani/nasa-nearest-earth-objects
+dataset <- read.csv("neo.csv")
+
+# View the data and plots
+summary(dataset)
+
+# Estimated size
+library(ggplot2)
+ggplot(dataset, aes(x = est_diameter_min, y = est_diameter_max)) + geom_point() + 
+      labs(x = "Estimated Max Diameter", y = "Estimated Min Diameter",
+      title = "Scatter Plot of Estimated Max vs. Min Diameter")
+
+# Relative Velocity
+hist(dataset$relative_velocity, main = "Histogram of Asteroid Relative Velocity", xlab = "Velocity")
+
+# Miss Distance
+hist(dataset$miss_distance, main = "Histogram of Asteroid Miss Distance", xlab = "Distance")
+
+# Absolute Magnitude
+hist(dataset$absolute_magnitude, main = "Histogram of Asteroid Absolute Magnitude", xlab = "Magnitude")
+
+# Plot barplot of hazardous vs. non-hazardous asteroids
+barplot(table(dataset$hazardous), main = "Hazardous vs. Non-hazardous Asteroids")
+
+# Execute rpart, plot the decision tree
+library(rpart)
+tree <- rpart(hazardous ~ est_diameter_min + est_diameter_max + relative_velocity + miss_distance + absolute_magnitude,
+              data = dataset, method="class")
+library(rpart.plot)
+rpart.plot(tree)
+
+# Predict whether each asteroid will be classified as hazardous or not
+dataset$predHazardous <- predict(tree, data=dataset, type = "class")
+
+# Confusion Matrix
+rpconfusionmatrix <- table(dataset$hazardous, dataset$predHazardous)
+rpconfusionmatrix
+
+# Naive Bayes
+library(e1071)
+bayesModel <- naiveBayes(hazardous ~ est_diameter_min + est_diameter_max + relative_velocity + miss_distance + absolute_magnitude,
+                         data = dataset, method="class")
+
+# Predict using the model
+dataset$nbpredHazardous <- predict(bayesModel, dataset)
+
+# Confusion matrix
+nbconfusionmatrix <- table(dataset$hazardous, dataset$nbpredHazardous)
+nbconfusionmatrix
+
+# Compare accuracy
+rpAccuracy <- sum(diag(rpconfusionmatrix))/sum(rpconfusionmatrix)
+nbAccuracy <- sum(diag(nbconfusionmatrix))/sum(nbconfusionmatrix)
+rpAccuracy
+nbAccuracy
