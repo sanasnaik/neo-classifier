@@ -11,3 +11,4 @@ Finally, when I evaluated the accuracy of my rpart and naive Bayes models, the r
 From the confusion matrices, I gathered that rpart had much more false negatives (predicted that the asteroid was not hazardous when it was) and the naive bayes model yielded more false positives (predicted that the asteroid was hazardous, when it was safe). The rpart model is more likely to falsely assign an asteroid a “non-hazardous” classification while the naive bayes model is more likely to falsely assign an asteroid a “hazardous” classification. In terms of applicability, the naive bayes model is probably safer to use in the real world, because it would be safer to assume an asteroid is dangerous rather than assume a hazardous asteroid is safe.
 
 Dataset: https://www.kaggle.com/datasets/sameepvani/nasa-nearest-earth-objects
+Output and description: https://docs.google.com/document/d/1hF7NzrmeLFK_u_KxeEdLUrYvRaqfxNfg4jCzXUe2C1g/edit?usp=sharing
